@@ -1,0 +1,125 @@
+﻿@page "/calculator"
+
+<!-- Page Title -->
+<h1 style="color: #4CAF50; font-family: Arial, sans-serif; font-weight: bold;">Blazor Calculator</h1>
+<hr style="border-color: #4CAF50;" />
+
+<!-- Calculator Form -->
+<div style="margin-top: 20px;">
+    <!-- First Number Input -->
+    <div class="row">
+        <div class="col-md-3">
+            <label style="font-weight: bold;">Enter First Number</label>
+        </div>
+        <div class="col-md-4">
+            <input style="font-style:italic" placeholder="Enter 1st Number" @bind="@firstNumber" class="form-control" />
+        </div>
+    </div>
+    <br />
+
+    <!-- Second Number Input -->
+    <div class="row">
+        <div class="col-md-3">
+            <label style="font-weight: bold;">Enter Second Number</label>
+        </div>
+        <div class="col-md-4">
+            <input style="font-style:italic" placeholder="Enter 2nd Number" @bind="@secondNumber" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <!-- Result Display -->
+    <div class="row">
+        <div class="col-md-3">
+            <label style="font-weight: bold;">Result</label>
+        </div>
+        <div class="col-md-4">
+            <input readonly @bind="@result" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <!-- Calculator Button Events -->
+    <div class="row">
+        <!-- Add Button -->
+        <div class="col-md-2">
+            <button @onclick="Add" class="btn btn-outline-success">Add (+)</button>
+        </div>
+        <!-- Subtract Button -->
+        <div class="col-md-2">
+            <button @onclick="Subtract" class="btn btn-outline-primary">Subtract (−)</button>
+        </div>
+        <!-- Multiply Button -->
+        <div class="col-md-2">
+            <button @onclick="Multiply" class="btn btn-outline-info">Multiply (X)</button>
+        </div>
+        <!-- Divide Button -->
+        <div class="col-md-2">
+            <button @onclick="Divide" class="btn btn-outline-danger">Divide (/)</button>
+        </div>
+        <!-- Clear Button -->
+        <div class="col-md-2">
+            <button @onclick="Clear" class="btn btn-outline-secondary">Clear All</button>
+        </div>
+    </div>
+</div>
+
+
+@code
+{
+    // Variables to store user input and result
+    string firstNumber;
+    string secondNumber;
+    string result;
+
+    // Function for adding user input numbers
+    void Add()
+    {
+        result = (Convert.ToDouble(firstNumber) + Convert.ToDouble(secondNumber)).ToString();
+        ClearInput();
+    }
+
+    // Function for subtracting user input numbers
+    void Subtract()
+    {
+        result = (Convert.ToDouble(firstNumber) - Convert.ToDouble(secondNumber)).ToString();
+        ClearInput();
+    }
+
+    // Function for multiplying user input numbers
+    void Multiply()
+    {
+        result = (Convert.ToDouble(firstNumber) * Convert.ToDouble(secondNumber)).ToString();
+        ClearInput();
+    }
+
+    // Function for diving user input numbers
+    void Divide()
+    {
+        if (Convert.ToDouble(secondNumber) != 0)
+        {
+            result = (Convert.ToDouble(firstNumber) / Convert.ToDouble(secondNumber)).ToString();
+        }
+        else
+        {
+            result = "Cannot Divide by Zero";
+        }
+        ClearInput();
+
+    }
+
+    // Function to clear all fields
+    void Clear()
+    {
+        firstNumber = "";
+        secondNumber = "";
+        result = "";
+    }
+
+    // Function to clear inputs only
+    void ClearInput()
+    {
+        firstNumber = "";
+        secondNumber = "";
+
+    }
+
+}
